@@ -1,0 +1,18 @@
+fastapi
+uvicorn[standard]
+motor
+python-dotenv
+opencv-python
+websockets
+firebase-admin
+
+
+# Depois inserir controle de versão, com as versões corretas:
+
+# fastapi==0.110.0
+# uvicorn[standard]==0.29.0
+# motor==3.4.0
+# python-dotenv==1.0.1
+# opencv-python==4.9.0.80
+# websockets==12.0
+# firebase-admin==6.4.0
