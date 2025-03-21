@@ -85,6 +85,7 @@ npm install
 ```
 ### ⚙️ 4. Rodar o Backend (API FastAPI)
 ```bash
+cd backend
 uvicorn backend.main:app --reload
 ```
 A API estará disponível em http://localhost:8000
