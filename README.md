@@ -90,7 +90,7 @@ uvicorn backend.main:app --reload
 ```
 A API estará disponível em http://localhost:8000
 
-### 🖥️ 5. Rodar o Frontend
+### 🖥️ 5. Rodar o Frontendcd
 ```bash
 npm run start
 ```

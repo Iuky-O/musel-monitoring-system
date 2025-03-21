@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from app.api.test_connection import router as test_router
-from app.api.vision import router as vision_router
+from .api.test_connection import router as test_router
+from .api.vision import router as vision_router
 
 app = FastAPI()
 
