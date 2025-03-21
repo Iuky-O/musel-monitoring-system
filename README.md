@@ -24,10 +24,19 @@ musel-monitoring-system/
 ├── frontend/
 │   ├── public/            # Estáticos
 │   ├── src/               # Código fonte (JS, CSS, HTML)
-│
-├── embarcado/
-│   ├── sensores/          # Código ESP32 - sensores
-│   └── camera/            # Código ESP32-CAM
+│   ├── src/
+│       ├── assets/                # Imagens, ícones, estilos globais
+│       ├── pages/                 # Páginas do sistema
+│   │   │    ├── admin/             # Páginas de administração
+│   │   │    │   ├── Dashboard.js   # Dashboard de monitoramento
+│   │   │    │   ├── Obras.js       # Gerenciamento de obras
+│   │   │    │   └── Visao.js       # Visão computacional (câmera e reconhecimento)
+│   │   │    ├── user/              # Páginas de interação com o usuário
+│   │   │    │   ├── Home.js        # Página inicial
+│   │   │    │   ├── Obra.js        # Detalhes da obra (com visão computacional)
+│   │   │    │   └── Interacao.js   # Interação com a obra (quiz, etc.)
+│   │   ├── App.js                 # Componente principal (roteamento)
+│   │   ├── index.js               # Ponto de entrada
 │
 ├── scripts/               # Scripts auxiliares
 ├── tests/                 # Testes automatizados
@@ -35,6 +44,7 @@ musel-monitoring-system/
 ├── README.md
 ├── requirements.txt   # Dependências Python
 ├── package.json       # Dependências Frontend
+├── webpack.config.js
 ```
 
 ## 🚀 Como Executar o Projeto Localmente
