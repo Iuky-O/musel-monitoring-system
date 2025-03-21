@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from app.services.computer_vision import ComputerVisionService
+from ..services.computer_vision import ComputerVisionService
 
 router = APIRouter()
 vision_service = ComputerVisionService()
