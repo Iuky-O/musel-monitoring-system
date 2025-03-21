@@ -1,10 +1,11 @@
 from fastapi import FastAPI
-from app.api.test_connection import router as test_router
+# from app.api.test_connection import router as test_router
 from app.api.vision import router as vision_router
+from backend.app.api.admin.obras import obras
 
 app = FastAPI()
 
-app.include_router(test_router, prefix="/api")
+# app.include_router(test_router, prefix="/api")
 app.include_router(vision_router, prefix="/vision", tags=["vision"])
 
 @app.get("/")

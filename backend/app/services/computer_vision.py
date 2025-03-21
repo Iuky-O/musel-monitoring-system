@@ -1,4 +1,3 @@
-# backend/app/services/vision_service.py
 import numpy as np
 import cv2
 from tensorflow.keras.models import load_model
