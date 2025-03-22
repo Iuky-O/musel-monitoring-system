@@ -5,7 +5,7 @@ import base64
 import gdown
 import os
 
-class VisionService:
+class ComputerVisionService:  # Rename the class here
     def __init__(self):
         self.model = self._load_model()
         self.class_names = ['obra_1', 'obra_2', 'obra_3']  # Substitua pelas suas obras

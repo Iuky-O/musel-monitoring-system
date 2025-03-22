@@ -19,3 +19,4 @@ class ObraModel(BaseModel):
         json_encoders = {
             ObjectId: str
         }
+        
