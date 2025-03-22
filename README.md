@@ -58,7 +58,7 @@ cd musel-monitoring-system
 #### Criar o ambiente virtual
 
 ```bash
-python -m venv venv
+python -m venv .venv
 ```
 #### Ativar o ambiente virtual
 - Linux/Mac:
@@ -87,7 +87,29 @@ npm install
 ```bash
 cd backend
 uvicorn backend.main:app --reload
+
+ou
+
+uvicorn app.main:app --reload
 ```
+#### Verifique as rotas em:
+
+```bash
+http://127.0.0.1:8000/docs
+```
+
+#### Lista de rotas
+```bash
+
+Admin-Obras
+
+GET - http://127.0.0.1:8000/admin/obras/
+POST - http://127.0.0.1:8000/admin/obras/
+PUT - http://127.0.0.1:8000/admin/obras/{id}
+PATCH - http://127.0.0.1:8000/admin/obras/{id}
+DELETE - http://127.0.0.1:8000/admin/obras/{id}
+```
+
 A API estará disponível em http://localhost:8000
 
 ### 🖥️ 5. Rodar o Frontendcd

@@ -31,3 +31,10 @@ gdown==4.7.3
 pytest==8.0.0
 pytest-asyncio==0.23.5
 httpx==0.26.0
+
+
+#Google drive
+google-auth==2.38.0
+google-auth-oauthlib==1.2.1
+google-auth-httplib2==0.2.0
+google-api-python-client==2.165.0
