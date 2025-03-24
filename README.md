@@ -15,7 +15,12 @@ musel-monitoring-system/
 │
 ├── backend/
 │   ├── app/
-│   │   ├── api/           # Endpoints
+│   │   ├── api/  # Endpoints
+|   |   |    ├── admin
+|   |   |    ├── embarcado/
+|   |   |    ├── exibicao/
+|   |   ├── data/ #Conexão com Banco de dados
+|   |   |    ├── database.py         
 │   │   ├── models/        # Modelos de dados
 │   │   ├── services/      # Lógicas de negócio
 │   │   └── utils/         # Funções auxiliares
