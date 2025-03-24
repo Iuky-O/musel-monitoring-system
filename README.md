@@ -117,8 +117,8 @@ DELETE - http://127.0.0.1:8000/admin/obras/{id}
 ```
 ```bash
 Interações
-POST -http://127.0.0.1:8000/interation/obras/{obra_id}/comentar
-POST - http://127.0.0.1:8000/interation/obras/{obra_id}/curtir
+POST -http://127.0.0.1:8000/interacao/obras/{obra_id}/comentar
+POST - http://127.0.0.1:8000/interacao/obras/{obra_id}/curtir
 ```
 A API estará disponível em http://localhost:8000
 
