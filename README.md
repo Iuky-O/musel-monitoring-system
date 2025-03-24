@@ -115,7 +115,11 @@ PUT - http://127.0.0.1:8000/admin/obras/{id}
 PATCH - http://127.0.0.1:8000/admin/obras/{id}
 DELETE - http://127.0.0.1:8000/admin/obras/{id}
 ```
-
+```bash
+Interações
+POST -http://127.0.0.1:8000/interation/obras/{obra_id}/comentar
+POST - http://127.0.0.1:8000/interation/obras/{obra_id}/curtir
+```
 A API estará disponível em http://localhost:8000
 
 ### 🖥️ 5. Rodar o Frontendcd
