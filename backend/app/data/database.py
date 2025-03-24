@@ -14,7 +14,7 @@ MONGO_DB = os.getenv("MONGO_DB")
 client = AsyncIOMotorClient(MONGO_URL)
 database = client[MONGO_DB]
 # collection = database.usuarios
-
+colecao_interacoes = database["interacoes"]
 
 @app.on_event("startup")
 async def startup_db_client():
