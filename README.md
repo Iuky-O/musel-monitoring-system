@@ -110,6 +110,7 @@ Admin-Obras
 
 GET - http://127.0.0.1:8000/admin/obras/
 POST - http://127.0.0.1:8000/admin/obras/
+GET - http://127.0.0.1:8000/admin/obras/{id}
 PUT - http://127.0.0.1:8000/admin/obras/{id}
 PATCH - http://127.0.0.1:8000/admin/obras/{id}
 DELETE - http://127.0.0.1:8000/admin/obras/{id}
@@ -128,5 +129,8 @@ Interface acessível em http://localhost:8080
 - Configure o Wi-Fi e IP da API no código
 - ESP32 envia informações para a API automaticamente
 
+### 7. Como testar os Endpoints
+
+No 
 
 

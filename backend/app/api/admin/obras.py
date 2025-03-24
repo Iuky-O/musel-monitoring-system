@@ -7,35 +7,6 @@ router = APIRouter()
 
 collection = get_obra_collection()
 
-# from fastapi import APIRouter, HTTPException, UploadFile, File, Form
-# from app.data.database import get_obra_collection
-# from app.models.ObraModel import ObraModel
-# from bson import ObjectId
-# from pydantic import TypeAdapter
-# from app.services.upload_drive import organize_and_upload_files
-# import os
-
-# router = APIRouter()
-
-# @router.post("/obras")
-# async def criar_obra(files: list[UploadFile] = File(...)):
-#     folder_id = os.getenv("ID_PASTA_MONALISA")  # Pega o ID da pasta do ambiente
-    
-#     if not folder_id:
-#         raise HTTPException(status_code=500, detail="ID da pasta 'monalisa' não configurado.")
-    
-#     try:
-#         file_links = await organize_and_upload_files(folder_id, files)
-#     except Exception as e:
-#         raise HTTPException(status_code=500, detail=f"Erro ao fazer upload no Google Drive: {e}")
-    
-#     return {
-#         "file_links": file_links,
-#         "message": "Arquivos enviados com sucesso!"
-#     }
-## ANTIGOS
-
-
 @router.get("/obras", response_model=list[ObraModel])
 async def listar_obras():
 
@@ -64,6 +35,25 @@ async def criar_obra(obra: ObraModel):
     obra_dict['_id'] = str(result.inserted_id)
     
     return {**obra.dict(), "id": obra_dict['_id'], "message": "Obra criada com sucesso"}
+
+@router.get("/obras/{id}", response_model=ObraModel)
+async def buscar_obra_especifica(id: str):
+
+    try:
+        obra_id = ObjectId(id)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail="ID inválido")
+
+    collection = await get_obra_collection()
+
+    obra = await collection.find_one({"_id": obra_id})
+
+    if obra is None:
+        raise HTTPException(status_code=404, detail="Obra não encontrada")
+
+    obra["_id"] = str(obra["_id"])
+
+    return obra
 
 @router.put("/obras/{id}")
 async def atualiza_obra(id: str, obra: ObraModel):
