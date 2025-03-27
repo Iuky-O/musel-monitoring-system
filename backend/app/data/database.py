@@ -31,6 +31,9 @@ async def shutdown_db_client():
 async def get_obra_collection():
     return database.get_collection("obras_de_arte")
 
+async def get_visitacoes_collection():
+    return database.get_collection("visitacoes")
+
 @app.get("/")
 async def read_root():
     collection = await get_obra_collection()
