@@ -1,20 +1,17 @@
 from fastapi import FastAPI
-from .api.test_connection import router as test_router
-from .api.embarcado.vision import router as vision_router
 from .api.exibicao.interacoes import router as interacoes_router
-from .api.exibicao.conteudo import router as conteudo_router
-from app.api.admin import obras, contagem
+from app.api.admin import obras, visitas
+from app.api.ws import router as ws_router
+
 
 app = FastAPI()
 
-app.include_router(test_router, prefix="/api")
-app.include_router(interacoes_router,prefix="/interation", tags=["Interation"])
-app.include_router(conteudo_router,prefix="/content", tags=["content"])
-app.include_router(vision_router, prefix="/vision", tags=["vision"])
+app.include_router(interacoes_router,prefix="/interacao", tags=["Interacao"])
 app.include_router(obras.router, prefix="/admin", tags=["obras"])
-app.include_router(contagem.router, prefix="/admin", tags=["contagem"])
+app.include_router(visitas.router, prefix="/admin", tags=["visitas"])
+app.include_router(ws_router, prefix="/ws", tags=["websocket"])
 
 @app.get("/")
 def home():
     return {"message": "API rodando!"}
-from app.data.database import get_obra_collection
+# from app.data.database import get_obra_collection
