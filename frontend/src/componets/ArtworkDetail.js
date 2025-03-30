@@ -1,4 +1,3 @@
-// ArtworkDetail.js (novo componente)
 import React from 'react';
 
 const ArtworkDetail = ({ artwork }) => {
