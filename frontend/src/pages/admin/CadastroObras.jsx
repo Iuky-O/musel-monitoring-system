@@ -12,7 +12,6 @@ function CadastroObras() {
         image_url: "",
     });
 
-    // Atualiza o estado dos campos do formulário
     const handleChange = (e) => {
         setObra({ ...obra, [e.target.name]: e.target.value });
     };
@@ -20,16 +19,15 @@ function CadastroObras() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Antes de enviar, converta os campos para o formato correto
         const obraValidada = {
             titulo: obra.titulo,
-            artistas: obra.artistas.split(",").map(artista => artista.trim()), // Converte o campo de artistas em uma lista
+            artistas: obra.artistas.split(",").map(artista => artista.trim()),
             descricao: obra.descricao,
             localizacao: obra.localizacao,
-            ano: parseInt(obra.ano), // Certifique-se de enviar como número
+            ano: parseInt(obra.ano), 
             video_url: obra.video_url,
             audio_url: obra.audio_url,
-            imagens_url: obra.image_url ? [obra.image_url] : [], // Converte URL da imagem para uma lista
+            imagens_url: obra.image_url ? [obra.image_url] : [],
         };
 
         try {
