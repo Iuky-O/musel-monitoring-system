@@ -15,6 +15,7 @@ client = AsyncIOMotorClient(MONGO_URL)
 database = client[MONGO_DB]
 
 colecao_interacoes = database["interacoes"]
+colecao_visitas = database["visitacoes"]
 
 @app.on_event("startup")
 async def startup_db_client():
@@ -30,6 +31,7 @@ async def shutdown_db_client():
 
 async def get_obra_collection():
     return database.get_collection("obras_de_arte")
+
 
 @app.get("/")
 async def read_root():
