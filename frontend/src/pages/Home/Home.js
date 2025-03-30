@@ -11,7 +11,7 @@ function Home() {
     }, []);
 
     return (
-        <div style={{ textAlign: "center", marginTop: "50px" }}>
+        <div style={{ textAlign: "center", marginTop: "30px" }}>
             {artwork ? (
                 <>
                     <h1>{artwork.title}</h1>
