@@ -39,6 +39,7 @@ function Home() {
     }, []);
 
     return (
+<<<<<<< HEAD
         <div style={{ 
             textAlign: "center", 
             marginTop: "50px",
@@ -106,12 +107,26 @@ function Home() {
                     </div>
                 )}
             </div>
+=======
+        <div style={{ textAlign: "center", marginTop: "30px" }}>
+            {artwork ? (
+                <>
+                    <h1>{artwork.title}</h1>
+                    <p>{artwork.description}</p>
+                    <img src={artwork.image_url} alt={artwork.title} style={{ width: "300px" }} />
+                    <audio controls src={artwork.audio_url}></audio>
+                </>
+            ) : (
+                <p>Aproxime-se de uma obra para saber mais!</p>
+            )}
+>>>>>>> b4c9ba0d47460a0213c5da4977bcb13c75ce43a4
         </div>
     );
 }
 
 export default Home;
 
+<<<<<<< HEAD
 // import { useEffect, useState } from "react";
 
 // function Home() {
@@ -148,3 +163,5 @@ export default Home;
 // }
 
 // export default Home;
+=======
+>>>>>>> b4c9ba0d47460a0213c5da4977bcb13c75ce43a4

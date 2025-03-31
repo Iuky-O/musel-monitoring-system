@@ -1,4 +1,5 @@
 import React from 'react';
+import AppRouter from './router/AppRouter.jsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Obra from './pages/user/Obra';
 import Home from "./pages/Home/Home";
@@ -8,15 +9,9 @@ import ListaObras from "./pages/admin/ListaObras.jsx";
 
 const App = () => {
     return (
-        <Router>
-            <Routes>
-            <Route path="/" element={<Home />} />
-                <Route path="/admin" element={<AdminDashboard />} />
-                <Route path="/admin/cadastro" element={<CadastroObras />} />
-                <Route path="/admin/lista" element={<ListaObras />} />
-                <Route path="/user/obra" element={<Obra />} />
-            </Routes>
-        </Router>
+        <div className="app">
+            <AppRouter />
+        </div>
     );
 };
 

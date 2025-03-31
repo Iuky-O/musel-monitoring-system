@@ -90,11 +90,11 @@ npm install
 ```
 ### ⚙️ 4. Rodar o Backend (API FastAPI)
 ```bash
-cd backend
+
 uvicorn backend.main:app --reload
 
 ou
-
+cd backend
 uvicorn app.main:app --reload
 ```
 #### Verifique as rotas em:
