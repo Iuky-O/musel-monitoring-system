@@ -11,7 +11,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/, // Agora suporta .js e .jsx
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -25,6 +25,9 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
     ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'], // Permite importar arquivos sem precisar da extensão
   },
   plugins: [
     new HtmlWebpackPlugin({

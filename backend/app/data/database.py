@@ -29,8 +29,9 @@ async def startup_db_client():
 async def shutdown_db_client():
     client.close()
 
-async def get_obra_collection():
+def get_obra_collection():
     return database.get_collection("obras_de_arte")
+
 
 
 @app.get("/")

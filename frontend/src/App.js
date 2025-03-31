@@ -1,11 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Visao from './pages/admin/Visao';
 import Obra from './pages/user/Obra';
 import Home from "./pages/Home/Home";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import CadastroObras from "./pages/admin/CadastroObras";
-import ListaObras from "./pages/admin/ListaObras";
+import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
+import CadastroObras from "./pages/admin/CadastroObras.jsx";
+import ListaObras from "./pages/admin/ListaObras.jsx";
 
 const App = () => {
     return (
@@ -15,7 +14,6 @@ const App = () => {
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/admin/cadastro" element={<CadastroObras />} />
                 <Route path="/admin/lista" element={<ListaObras />} />
-                <Route path="/admin/visao" element={<Visao />} />
                 <Route path="/user/obra" element={<Obra />} />
             </Routes>
         </Router>

@@ -105,7 +105,6 @@ http://127.0.0.1:8000/docs
 
 #### Lista de rotas
 ```bash
-
 Admin-Obras
 
 GET - http://127.0.0.1:8000/admin/obras/
@@ -117,8 +116,15 @@ DELETE - http://127.0.0.1:8000/admin/obras/{id}
 ```
 ```bash
 Interações
+
 POST -http://127.0.0.1:8000/interacao/obras/{obra_id}/comentar
 POST - http://127.0.0.1:8000/interacao/obras/{obra_id}/curtir
+```
+```bash
+Admin-Obras
+
+POST - http://127.0.0.1:8000/admin/visitas/
+GET - http://127.0.0.1:8000/admin/visitas/{id}
 ```
 A API estará disponível em http://localhost:8000
 
