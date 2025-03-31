@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from app.data.database import database
 from app.models.VisitModel import VisitModel
+from app.models.Sensor import DistanceData
 from bson import ObjectId
 from typing import Optional
 from app.api.ws import broadcast_visita_update, broadcast_sensor_data
@@ -59,11 +60,16 @@ async def listar_todas_visitas():
         visits.append(visit)
     return visits
 
-@router.post("/sensor-data")
-async def receber_dados_sensor(distance: float, presence: bool, id_obra: str):
-    try:
-        # Notifica via WebSocket
-        await broadcast_sensor_data(distance, presence, id_obra)
-        return {"status": "Dados recebidos"}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+# @router.post("/sensor-data")
+# async def receber_dados_sensor(distance: float, presence: bool, id_obra: str):
+#     try:
+#         # Notifica via WebSocket
+#         await broadcast_sensor_data(distance, presence, id_obra)
+#         return {"status": "Dados recebidos"}
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/distance")
+async def receive_distance(data: DistanceData):
+    print(f"Distância recebida: {data.distance} cm")
+    return {"status": "sucesso", "distance": data.distance}
