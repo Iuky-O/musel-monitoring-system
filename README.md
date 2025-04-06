@@ -16,35 +16,65 @@ musel-monitoring-system/
 ├── backend/
 │   ├── app/
 │   │   ├── api/  # Endpoints
-|   |   |    ├── admin
+|   |   |    ├── admin #aqui tem: obras.py, sensor.py, visitas.py 
 |   |   |    ├── embarcado/
-|   |   |    ├── exibicao/
+|   |   |    ├── exibicao/ #endpoints de interacao.py
+|   |   |    └── ws.py
+|
 |   |   ├── data/ #Conexão com Banco de dados
-|   |   |    ├── database.py         
+|   |   |    └── database.py    
+|
 │   │   ├── models/        # Modelos de dados
+|   |   |    ├── interacao.py
+|   |   |    ├── ObraModel.py
+|   |   |    ├── Sensor.py
+|   |   |    └── VisitModel.py
+|
 │   │   ├── services/      # Lógicas de negócio
+|   |   |    └── interacao_service.py
+|
+│   │   ├── tests/      # Testes
+|
 │   │   └── utils/         # Funções auxiliares
-│   ├── main.py            # Ponto de entrada da API FastAPI
+│   └── main.py            # Ponto de entrada da API FastAPI
 │
 ├── frontend/
 │   ├── public/            # Estáticos
+│   |   ├── index.html     #entrada
+│   |   └── scripts.js
+|
 │   ├── src/               # Código fonte (JS, CSS, HTML)
-│   ├── src/
-│       ├── assets/                # Imagens, ícones, estilos globais
-│       ├── pages/                 # Páginas do sistema
+│   |   ├── assets/                # Imagens, ícones, estilos globais
+│   |   ├── components/               
+│   │   │    ├── VisitaCounter.jsx      # Contagem de pessoas
+│   │   │    ├── WebSocket.js           # Tempo real
+│   │   │    └── ArtworkDetails.js      #
+|
+│   |   ├── hook/              
+│   │   │    └── useWebSocket.jsx
+|
+│   |   ├── pages/                 # Páginas do sistema
 │   │   │    ├── admin/             # Páginas de administração
-│   │   │    │   ├── Dashboard.js   # Dashboard de monitoramento
-│   │   │    │   ├── Obras.js       # Gerenciamento de obras
-│   │   │    │   └── Visao.js       # Visão computacional (câmera e reconhecimento)
-│   │   │    ├── user/              # Páginas de interação com o usuário
+│   │   │    │   ├── AdminDashboard.js   # Dashboard de monitoramento
+│   │   │    │   ├── CadastroObras.js       # Gerenciamento de obras
+│   │   │    │   └── index.jsx
+│   │   │    ├── Home/              # Páginas de home
 │   │   │    │   ├── Home.js        # Página inicial
-│   │   │    │   ├── Obra.js        # Detalhes da obra (com visão computacional)
-│   │   │    │   └── Interacao.js   # Interação com a obra (quiz, etc.)
+│   │   │    │   └── index.js   #
+│   │   │    ├── user/              # Páginas de interação com o usuário
+│   │   │    │   └── Obra.js        # Detalhes da obra (com visão computacional)
+|
+│   |   ├── router/                 # Rotas
+│   │   │    └── AppRouter.jsx      # Onde fica as rotas
+|
+│   |   ├── style/                 # Estilos
+│   │   │    └── index.css      # Onde fica os estilos
+|
 │   │   ├── App.js                 # Componente principal (roteamento)
-│   │   ├── index.js               # Ponto de entrada
-│
-├── scripts/               # Scripts auxiliares
-├── tests/                 # Testes automatizados
+│   │   └── index.js               # Ponto de entrada
+│   └── tsconfig.json
+|
+├── .venv
 ├── .gitignore
 ├── README.md
 ├── requirements.txt   # Dependências Python
@@ -91,10 +121,8 @@ npm install
 ### ⚙️ 4. Rodar o Backend (API FastAPI)
 ```bash
 
-uvicorn backend.main:app --reload
-
-ou
 cd backend
+
 uvicorn app.main:app --reload
 ```
 #### Verifique as rotas em:
@@ -103,7 +131,7 @@ uvicorn app.main:app --reload
 http://127.0.0.1:8000/docs
 ```
 
-#### Lista de rotas
+#### Lista de endpoints
 ```bash
 Admin-Obras
 
@@ -130,9 +158,25 @@ A API estará disponível em http://localhost:8000
 
 ### 🖥️ 5. Rodar o Frontendcd
 ```bash
+cd frontend
+
 npm run start
 ```
 Interface acessível em http://localhost:8080
+
+#### Lista de rotas
+```bash
+Admin
+
+http://localhost:3000/
+http://localhost:3000/#/admin/
+http://localhost:3000/#/admin/cadastro
+http://localhost:3000/#/admin/lista
+
+User
+http://localhost:3000/#/user/obra
+
+```
 
 ### 🤖 6. Rodar o Sistema Embarcado
 - Faça o upload dos códigos para o ESP32 e ESP32-CAM

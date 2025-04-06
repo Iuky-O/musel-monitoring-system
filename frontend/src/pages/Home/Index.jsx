@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useWebSocket from "../../hook/useWebSocket";
-import ArtworkDetail from "../../componets/ArtworkDetail";
+import ArtworkDetail from "../../components/ArtworkDetail";
 
 function Home() {
     const [artwork, setArtwork] = useState(null);
