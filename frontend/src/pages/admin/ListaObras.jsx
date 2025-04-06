@@ -5,17 +5,10 @@ function ListaObras() {
     const [erro, setErro] = useState(null);
 
     useEffect(() => {
-<<<<<<< HEAD
         fetch("http://localhost:8000/admin/obras")
             .then(response => response.json())
             .then(data => setObras(data))
             .catch(error => setErro("Erro ao carregar obras"));
-=======
-        fetch("http://127.0.0.1:8000/admin/obras")
-        .then(response => response.json())
-        .then(data => setObras(data))
-        .catch(error => console.error("Erro ao buscar obras:", error));
->>>>>>> b4c9ba0d47460a0213c5da4977bcb13c75ce43a4
     }, []);
 
     return (
