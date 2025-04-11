@@ -1,81 +1,77 @@
-# from fastapi import APIRouter, Request, WebSocket
-# from pydantic import BaseModel
-# from typing import List
+# #include <WiFi.h>
+# #include <HTTPClient.h>
 
-# # Guardar os clientes conectados
-# websockets: List[WebSocket] = []
-# router = APIRouter()
+# const char* ssid = "EDUARDO_2.4G"; //IVONE & JOSE
+# const char* password = "22edpa12"; //19601976
+# const char* serverUrl = "http://192.168.1.13:8000/distance";  // URL do FastAPI
+# //const char* serverUrl = "http://192.168.1.13:8000/embarcado/distance";
 
-# # Variável global para armazenar a última distância recebida
-# ultima_distancia = None
+# int SonarTrigger = 5;
+# int SonarEcho = 18;
+# long tempo;
+# int distancia;
 
-# class SensorData(BaseModel):
-#     distance: int
+# void setup() {
+#     Serial.begin(115200);
+#     pinMode(SonarTrigger, OUTPUT);
+#     pinMode(SonarEcho, INPUT);
 
-# @router.websocket("/ws")
-# async def websocket_endpoint(websocket: WebSocket):
-#     await websocket.accept()
-#     websockets.append(websocket)
-#     try:
-#         while True:
-#             await websocket.receive_text()  # só pra manter a conexão
-#     except WebSocketDisconnect:
-#         websockets.remove(websocket)
+#     // Conectar ao Wi-Fi
+#     WiFi.begin(ssid, password);
+#     while (WiFi.status() != WL_CONNECTED) {
+#         delay(1000);
+#         Serial.print(".");
+#     }
+#     Serial.println("Conectado ao Wi-Fi!");
+# }
+
+# void loop() {
+#     // Emitir pulso
+#     digitalWrite(SonarTrigger, LOW);
+#     delayMicroseconds(2);
+#     digitalWrite(SonarTrigger, HIGH);
+#     delayMicroseconds(10);
+#     digitalWrite(SonarTrigger, LOW);
+
+#     // Medir tempo do eco
+#     tempo = pulseIn(SonarEcho, HIGH);
+#     Serial.print("Tempo: ");
+#     Serial.println(tempo);
+
+#     distancia = tempo / 58.2;
+
+#     Serial.print("Distancia: ");
+#     Serial.print(distancia);
+#     Serial.println(" cm");
+
+#     // Enviar dados para o backend
+#     if (WiFi.status() == WL_CONNECTED) {
+#         HTTPClient http;
+#         http.begin(serverUrl);
+#         http.addHeader("Content-Type", "application/json");
+
+#         String payload = "{\"distance\": " + String(distancia) + "}";
+
+#         int httpResponseCode = http.POST(payload);
+
+#         Serial.print("Resposta do servidor: ");
+#         Serial.println(httpResponseCode);  // Exibe o código de resposta HTTP
+
+#         if (httpResponseCode > 0) {
+#             String response = http.getString();  // Pega o corpo da resposta
+#             Serial.println("Resposta do servidor:");
+#             Serial.println(response);
+#         } else {
+#             Serial.println("Erro ao enviar dados.");
+#             Serial.print("Código de erro HTTP: ");
+#             Serial.println(httpResponseCode);  // Código de erro HTTP
+#         }
+
+#         http.end();
+#     } else {
+#         Serial.println("Não conectado ao Wi-Fi");
+#     }
 
 
-# # @router.post("/distance")
-# # async def receber_distancia(request: Request):
-# #     data = await request.json()
-# #     print(">>> RECEBIDO:", data)
-# #     return {"message": "Dados recebidos com sucesso"}
-
-
-# # async def receive_distance(data: SensorData):
-# #     global ultima_distancia
-# #     ultima_distancia = data.distance
-# #     print(f"Distância recebida: {data.distance} cm")
-# #     return {"message": "Distância recebida com sucesso", "distancia": data.distance}
-
-# @router.get("/ultima-distancia")
-# async def get_ultima_distancia():
-#     if ultima_distancia is not None:
-#         return {"distancia": ultima_distancia}
-#     else:
-#         return {"distancia": None, "message": "Nenhuma distância registrada ainda"}
-
-
-# @router.post("/distance")
-# async def receber_distancia(request: Request):
-#     data = await request.json()
-#     print(">>> RECEBIDO:", data)
-
-#     # Enviar para todos os clientes WebSocket conectados
-#     for ws in websockets:
-#         await ws.send_json({
-#             "presence": True,
-#             "id_obra": 1  # Substitua com o ID correto vindo do sensor
-#         })
-
-#     return {"message": "Dados recebidos com sucesso"}
-
-
-from fastapi import APIRouter
-from pydantic import BaseModel
-from app.api.exibicao.ws import send_data_to_clients
-
-
-router = APIRouter()
-
-class DistanceData(BaseModel):
-    distance: int
-
-@router.post("/distance")
-async def receive_distance(data: DistanceData):
-    try:
-        await send_data_to_clients(data.distance)
-        print(f"Distância recebida: {data.distance} cm")
-        return {"status": "sucesso", "distance": data.distance}
-    except Exception as e:
-        print(f"Erro ao enviar para WebSocket: {e}")
-        return {"status": "erro", "detalhes": str(e)}
-
+#     delay(1000);
+# }

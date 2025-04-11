@@ -2,8 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .api.exibicao.interacoes import router as interacoes_router
 from app.api.admin import obras, sensor
-from app.api.embarcado import esp32
-from app.api.exibicao import ws
+from app.models.Sensor import DistanceData
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -17,25 +16,12 @@ app.add_middleware(
     allow_headers=["*"],  # Permite todos os headers
 )
 
-
-# Permitir requisições do frontend (localhost:3000)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # ou coloque o IP do seu frontend
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
 app.include_router(interacoes_router,prefix="/interacao", tags=["Interacao"])
 app.include_router(obras.router, prefix="/admin", tags=["obras"])
 # app.include_router(visitas.router, prefix="/admin", tags=["visitas"])
-app.include_router(sensor.router, tags=["distance"])
-app.include_router(esp32.router, prefix="/embarcado", tags=["Sensor"])
-app.include_router(ws.router, tags=["WebSocket"])
-
+app.include_router(sensor.router, prefix="/exibicao", tags=["distance"])
 
 @app.get("/")
 async def read_root():
-    return {"message": "Hello World"}
+    return {"message": "Servidor FastAPI funcionando!"}
 

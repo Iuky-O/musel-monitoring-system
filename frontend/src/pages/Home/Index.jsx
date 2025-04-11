@@ -6,11 +6,15 @@ function Home() {
     const [artwork, setArtwork] = useState(null);
     const [isFetching, setIsFetching] = useState(false);
 
+    const [sensorData, setSensorData] = useState(null);
+
     const { loading, error } = useWebSocket("ws://127.0.0.1:8000/ws", (data) => {
+        setSensorData(data);
         if (data?.presence && data?.id_obra) {
             fetchArtworkDetails(data.id_obra);
         }
     });
+    
 
     const fetchArtworkDetails = async (id_obra) => {
         setIsFetching(true);
@@ -29,9 +33,18 @@ function Home() {
 
     return (
         <div className="artwork-container">
+            {sensorData && (
+                <div style={{ marginBottom: "20px" }}>
+                    <h3>Distância: {sensorData.distance} cm</h3>
+                    <p style={{ color: sensorData.presence ? "green" : "red" }}>
+                        {sensorData.presence ? "Pessoa detectada" : "Nenhuma pessoa"}
+                    </p>
+                </div>
+            )}
+
             {loading && <p>Conectando ao WebSocket...</p>}
             {error && <p className="error">Erro na conexão WebSocket!</p>}
-            
+
             {isFetching ? (
                 <div className="loading">
                     <p>Carregando detalhes da obra...</p>
@@ -42,6 +55,7 @@ function Home() {
                 <p className="empty-message">Aproxime-se de uma obra para saber mais!</p>
             )}
         </div>
+
     );
 }
 
