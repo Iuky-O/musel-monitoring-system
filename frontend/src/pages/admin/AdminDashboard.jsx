@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import DistanciaAtual from "../../components/DistanciaAtual"; // ajuste o caminho se necessário
+import DistanciaAtual from "../../components/DistanciaAtual";
 
 function AdminDashboard() {
     return (
