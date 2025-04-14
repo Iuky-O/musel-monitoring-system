@@ -1,11 +1,15 @@
 import React from 'react';
-
 import { Link } from "react-router-dom";
+import DistanciaAtual from "../../components/DistanciaAtual";
 
 function AdminDashboard() {
     return (
         <div>
             <h1>Painel Administrativo</h1>
+
+            {/* Bloco que mostra a distância vinda do ESP32 */}
+            <DistanciaAtual />
+
             <nav>
                 <ul>
                     <li><Link to="/admin/cadastro">Cadastrar Obra</Link></li>

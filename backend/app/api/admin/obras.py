@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File
 from app.data.database import get_obra_collection
-from app.models.ObraModel import ObraModel
+from app.models.ObraModel import ObraModel, ObraModelPost
 from bson import ObjectId
 
 router = APIRouter()
@@ -10,7 +10,7 @@ collection = get_obra_collection()
 @router.get("/obras", response_model=list[ObraModel])
 async def listar_obras():
 
-    collection = await get_obra_collection()
+    collection = get_obra_collection()
 
     obras = []
 
@@ -21,9 +21,9 @@ async def listar_obras():
     return obras
 
 @router.post("/obras")
-async def criar_obra(obra: ObraModel):
+async def criar_obra(obra: ObraModelPost):
 
-    collection = await get_obra_collection()
+    collection = get_obra_collection()
     print(f"Recebendo dados: {obra}")
 
     obra_dict = obra.dict(by_alias=True)
@@ -44,7 +44,7 @@ async def buscar_obra_especifica(id: str):
     except Exception as e:
         raise HTTPException(status_code=400, detail="ID inválido")
 
-    collection = await get_obra_collection()
+    collection = get_obra_collection()
 
     obra = await collection.find_one({"_id": obra_id})
 
@@ -58,7 +58,7 @@ async def buscar_obra_especifica(id: str):
 @router.put("/obras/{id}")
 async def atualiza_obra(id: str, obra: ObraModel):
 
-    collection = await get_obra_collection()
+    collection = get_obra_collection()
 
     obra_dict = obra.dict(by_alias=True)
     obra_dict.pop("_id", None)
@@ -77,7 +77,7 @@ async def atualiza_obra(id: str, obra: ObraModel):
 
 @router.patch("/obras/{id}")
 async def atualizar_parcial_obra(id: str, obra: ObraModel):
-    collection = await get_obra_collection()
+    collection = get_obra_collection()
     
     obra_dict = obra.dict(exclude_unset=True, by_alias=True)# Converte a obra para dicionário, removendo o '_id' para evitar conflito
     
@@ -97,7 +97,7 @@ async def atualizar_parcial_obra(id: str, obra: ObraModel):
 @router.delete("/obras/{id}")
 async def deletar_obra(id: str):
 
-    collection = await get_obra_collection()
+    collection = get_obra_collection()
     
     # Deleta a obra pela ID
     result = await collection.delete_one({"_id": ObjectId(id)})

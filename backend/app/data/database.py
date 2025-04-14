@@ -29,13 +29,16 @@ async def startup_db_client():
 async def shutdown_db_client():
     client.close()
 
-async def get_obra_collection():
-    return database.get_collection("obras_de_arte")
+def get_obra_collection():
+    return database['obras_de_arte']
+
+def get_visita_collection():
+    return database.get_collection("visitacoes")
 
 
 @app.get("/")
 async def read_root():
-    collection = await get_obra_collection()
+    collection = get_obra_collection()
     obras = await collection.find().to_list(10)
     return obras
 
