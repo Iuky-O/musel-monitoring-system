@@ -1,26 +1,3 @@
-# from fastapi import APIRouter, HTTPException
-# from app.data.database import database
-# from app.models.Sensor import DistanceData
-# from app.models.DistanceModel import DistanceDT
-# from typing import Optional
-# from datetime import datetime, timedelta
-
-# router = APIRouter()
-
-# ultima_distancia = {"distancia": None}
-
-# @router.post("/distance")
-# async def receive_distance(data: DistanceData):
-#     print(f"Distância recebida: {data.distance} cm")
-#     ultima_distancia["distancia"] = data.distance  # Atualiza a variável global
-#     return {"status": "sucesso", "distance": data.distance}
-
-# @router.get("/distance")
-# async def get_last_distance():
-#     if ultima_distancia["distancia"] is None:
-#         return {"distancia": "Nenhuma distância registrada ainda"}
-#     return {"distancia": ultima_distancia["distancia"]}
-
 from fastapi import APIRouter, HTTPException
 from app.data.database import database
 from app.models.Sensor import DistanceData
