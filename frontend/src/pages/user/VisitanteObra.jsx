@@ -101,9 +101,14 @@ function VisitanteObra() {
     const extrairIdDoDrive = (url) => {
         const match = url.match(/\/d\/([^/]+)\//);
         return match ? match[1] : null;
-      };
+    };
 
-      
+    const speakText = (text) => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'pt-BR'; // Português do Brasil
+    window.speechSynthesis.speak(utterance);
+    };
+    
     const iniciarContagem = () => {
         let segundosRestantes = TEMPO_NECESSARIO_MS / 1000;
         setTempoRestante(segundosRestantes);
@@ -159,20 +164,13 @@ function VisitanteObra() {
                             ))}
                         </div>
                         ) : (
-                        <p>Nenhum artista informado.</p>
+                        <p>Artista desconhecido.</p>
                     )}
-
-                    {obra.imagens_url && obra.imagens_url.length > 0 ? (
-                        obra.imagens_url.map((url, index) => {
-                            const id = extrairIdDoDrive(url);
-                            const linkCorreto = `https://drive.google.com/uc?export=view&id=${id}`;
-                            return console.log(url, id, linkCorreto);
-                            //<img key={index} src={linkCorreto} alt="Imagem da Obra" width="300" />;
-                        })
-                    ) : (
-                        <p>Nenhum mídia de imagem informado.</p>
-                    )}
+                    
+                    <img src={obra.imagens_url} alt="Imagem da Obra" width="300" />
+                    
                     <p>{obra.descricao}</p>
+                    <button onClick={() => speakText(obra.descricao)}>Ouvir Descrição</button>
                 </div>
             ) : (
                 <p>Aproxime-se da obra para iniciar a visita.</p>
