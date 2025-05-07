@@ -3,6 +3,7 @@ import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from motor.motor_asyncio import AsyncIOMotorClient
+import certifi
 
 app = FastAPI()
 
@@ -11,7 +12,7 @@ load_dotenv()
 MONGO_URL = os.getenv("MONGO_URL")
 MONGO_DB = os.getenv("MONGO_DB")
 
-client = AsyncIOMotorClient(MONGO_URL)
+client = AsyncIOMotorClient(MONGO_URL, tlsCAFile=certifi.where(), tls=True)
 database = client[MONGO_DB]
 
 colecao_interacoes = database["interacoes"]

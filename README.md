@@ -176,6 +176,7 @@ http://localhost:3000/#/admin/lista
 
 User
 http://localhost:3000/#/user/obra
+http://localhost:3000/#/user/visualizar
 
 ```
 
