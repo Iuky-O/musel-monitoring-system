@@ -1,62 +1,9 @@
-// // src/visitante/VisitanteObra.jsx
-// import React, { useEffect, useState } from "react";
-
-// function VisitanteObra() {
-//     const [distancia, setDistancia] = useState(null);
-//     const [obra, setObra] = useState(null);
-
-//     useEffect(() => {
-//         const intervalo = setInterval(() => {
-//             fetch("http://localhost:8000/distance")
-//                 .then(res => res.json())
-//                 .then(data => {
-//                     const d = parseFloat(data.distancia);
-//                     setDistancia(d);
-
-//                     if (d >= 20 && d <= 30) {
-//                         fetch("http://localhost:8000/admin/obras")
-//                             .then(res => res.json())
-//                             .then(obras => {
-//                                 const obraAlvo = obras.find(o => o._id === "67e0adad46e5b921c4a270d9");
-//                                 setObra(obraAlvo);
-//                             });
-//                     } else {
-//                         setObra(null);
-//                     }
-//                 })
-//                 .catch(err => console.error("Erro ao buscar distância:", err));
-//         }, 3000);
-
-//         return () => clearInterval(intervalo);
-//     }, []);
-
-//     return (
-//         <div>
-//             <h1>Modo Visitante</h1>
-//             <p>Distância: {distancia !== null ? `${distancia} cm` : "Aguardando leitura..."}</p>
-
-//             {obra ? (
-//                 <div>
-//                     <h2>{obra.titulo}</h2>
-//                     <img src={obra.image_url} alt={obra.title} style={{ width: "300px" }} />
-//                     {/* <video controls src={obra.video_url} style={{ width: "400px" }} />
-//                     <audio controls src={obra.audio_url} /> */}
-//                     <p>{obra.descricao}</p>
-//                 </div>
-//             ) : (
-//                 <p>Aproxime-se para visualizar a obra.</p>
-//             )}
-//         </div>
-//     );
-// }
-
-// export default VisitanteObra;
-
 import React, { useEffect, useState, useRef } from "react";
+import '../../style/VisitanteObra.css';
 
 const DISTANCIA_MIN = 20;
 const DISTANCIA_MAX = 30;
-const TEMPO_NECESSARIO_MS = 5000; // 30 segundos
+const TEMPO_NECESSARIO_MS = 5000;
 
 function VisitanteObra() {
     const [distancia, setDistancia] = useState(null);
@@ -66,11 +13,9 @@ function VisitanteObra() {
 
     const intervaloRef = useRef(null);
     const timeoutRef = useRef(null);
-
     const ID_OBRA = "67e0adad46e5b921c4a270d9";
 
     useEffect(() => {
-        // Função de verificação contínua da distância
         intervaloRef.current = setInterval(async () => {
             try {
                 const res = await fetch("http://localhost:8000/exibicao/distance");
@@ -86,11 +31,10 @@ function VisitanteObra() {
                 } else if (!dentroDaFaixa && contadorAtivo) {
                     cancelarContagem();
                 }
-
             } catch (err) {
                 console.error("Erro ao buscar distância:", err);
             }
-        }, 1000); // checar a cada 1 segundo
+        }, 1000);
 
         return () => {
             clearInterval(intervaloRef.current);
@@ -98,17 +42,12 @@ function VisitanteObra() {
         };
     }, []);
 
-    const extrairIdDoDrive = (url) => {
-        const match = url.match(/\/d\/([^/]+)\//);
-        return match ? match[1] : null;
+    const speakText = (text) => {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'pt-BR';
+        window.speechSynthesis.speak(utterance);
     };
 
-    const speakText = (text) => {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'pt-BR'; // Português do Brasil
-    window.speechSynthesis.speak(utterance);
-    };
-    
     const iniciarContagem = () => {
         let segundosRestantes = TEMPO_NECESSARIO_MS / 1000;
         setTempoRestante(segundosRestantes);
@@ -127,7 +66,6 @@ function VisitanteObra() {
         setContadorAtivo(false);
         setTempoRestante(0);
 
-        // Buscar dados da obra
         try {
             const obrasRes = await fetch("http://localhost:8000/admin/obras");
             const obras = await obrasRes.json();
@@ -146,34 +84,33 @@ function VisitanteObra() {
     };
 
     return (
-        <div style={{ padding: 20 }}>
-            <h1>Modo Visitante</h1>
-            <p>Distância: {distancia !== null ? `${distancia} cm` : "Aguardando..."}</p>
+        <div className="visitante-container">
+            <h1 className="titulo">Modo Visitante</h1>
+            <p className="distancia">Distância: {distancia !== null ? `${distancia} cm` : "Aguardando..."}</p>
 
             {contadorAtivo && (
-                <p>Aguarde {tempoRestante} segundos para visualizar a obra...</p>
+                <p className="aguarde-msg">Aguarde {tempoRestante} segundos para visualizar a obra...</p>
             )}
 
             {obra ? (
-                <div style={{ marginTop: 20 }}>
-                    <h2>{obra.titulo}</h2>
-                    {obra.artistas && obra.artistas.length > 0 ? (
-                        <div>
-                            {obra.artistas.map((artista, index) => (
-                            <p key={index}>{artista}</p>
-                            ))}
+                <div className="obra-card">
+                    <div className="obra-imagem">
+                        <img src={obra.imagens_url} alt="Imagem da Obra" />
+                    </div>
+                    <div className="obra-info">
+                        <h2 className="obra-titulo">{obra.titulo}</h2>
+                        <p className="obra-meta">{obra.artistas?.join(", ")} • {obra.ano}</p>
+                        <div className="descricao">
+                            <h3>Descrição</h3>
+                            <p>{obra.descricao}</p>
+                            <button className="botao-ouvir" onClick={() => speakText(obra.descricao)}>
+                                Ouvir Descrição
+                            </button>
                         </div>
-                        ) : (
-                        <p>Artista desconhecido.</p>
-                    )}
-                    
-                    <img src={obra.imagens_url} alt="Imagem da Obra" width="300" />
-                    
-                    <p>{obra.descricao}</p>
-                    <button onClick={() => speakText(obra.descricao)}>Ouvir Descrição</button>
+                    </div>
                 </div>
             ) : (
-                <p>Aproxime-se da obra para iniciar a visita.</p>
+                <p className="proximidade-msg">Aproxime-se da obra para iniciar a visita.</p>
             )}
         </div>
     );
