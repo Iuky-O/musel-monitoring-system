@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f7f9fc;
+}
+
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 220px;
+    background-color: #1C339C;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+}
+
+.sidebar nav a {
+    color: white;
+    text-decoration: none;
+    margin-bottom: 10px;
+    display: block;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.sidebar nav a:hover {
+    background-color: #6BBBF7;
+    color: #000000;
+}
+
+.main-content {
+    flex: 1;
+    padding: 40px;
+    background-color: #ffffff;
+}
+
+.main-content h1 {
+    margin-bottom: 20px;
+    color: #1C339C;
+}
+
+.form-obra {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    max-width: 600px;
+}
+
+.form-obra input,
+.form-obra textarea {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-obra button {
+    background-color: #FFED54;
+    color: #000;
+    border: none;
+    padding: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.form-obra button:hover {
+    background-color: #e6d84b;
+}
