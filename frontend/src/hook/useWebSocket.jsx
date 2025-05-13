@@ -58,7 +58,7 @@ function useWebSocket(url, callback) {
             const data = JSON.parse(event.data);
             if (data.type === "sensor_data") {
                 setMessage(data);
-                callback(data); // sempre chama o callback, mesmo se presence for false
+                callback(data);
             }
         };
 

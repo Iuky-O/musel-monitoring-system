@@ -3,7 +3,7 @@ import useWebSocket from "react-use-websocket";
 
 const SerialMonitor = () => {
   const [messages, setMessages] = useState([]);
-  const { sendMessage, lastMessage } = useWebSocket("ws://127.0.0.1:8000/ws", {
+  const { sendMessage, lastMessage } = useWebSocket("ws://192.168.1.25:8000/ws", {
     onMessage: (event) => {
       setMessages((prev) => [...prev, event.data]);
     },

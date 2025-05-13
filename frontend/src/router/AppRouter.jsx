@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
-import Home from '../pages/Home/Index.jsx';
+import Home from '../pages/Home/Index.jsx'
 import AdminDashboard from '../pages/admin/AdminDashboard.jsx';  
 import CadastroObras from '../pages/admin/CadastroObras.jsx';
 import ListaObras from '../pages/admin/ListaObras.jsx';
@@ -9,7 +9,6 @@ import VisitanteObra from '../pages/user/VisitanteObra.jsx';
 import Obra from '../pages/user/Obra.js';
 
 const AppRouter = () => {
-    console.log("🚀 AppRouter carregado!");
     return (
         
         <Router>

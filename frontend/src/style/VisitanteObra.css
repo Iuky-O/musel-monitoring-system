@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+.visitante-container {
+  background-color: #FFFFFF;
+  color: #000000;
+  font-family: 'Arial', sans-serif;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.titulo {
+  font-family: 'Cinzel', serif;
+  text-align: center;
+  color: #1C339C;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.distancia, .aguarde-msg, .proximidade-msg {
+  text-align: center;
+  color: #1C339C;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.obra-card {
+  display: flex;
+  flex-direction: row;
+  background-color: #F0F4FF;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.obra-imagem img {
+  width: 300px;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.obra-info {
+  flex: 1;
+  margin-left: 2rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.obra-titulo {
+  font-family: 'Cinzel', serif;
+  color: #1C339C;
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.obra-meta {
+  color: #6BBBF7;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  font-family: 'Cinzel', serif;
+}
+
+.descricao h3 {
+  font-family: 'Playfair Display', serif;
+  color: #1C339C;
+  margin-bottom: 0.3rem;
+}
+
+.botao-ouvir {
+  margin-top: 0.5rem;
+  background-color: #FFED54;
+  color: #000000;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.botao-ouvir:hover {
+  background-color: #f8e03a;
+}
