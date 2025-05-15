@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .api.exibicao.interacoes import router as interacoes_router
 from app.api.admin import obras, sensor, visitas
 from app.models.Sensor import DistanceData
+from app.api.exibicao import detectar_mao
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -20,6 +21,7 @@ app.include_router(interacoes_router,prefix="/interacao", tags=["Interacao"])
 app.include_router(obras.router, prefix="/admin", tags=["obras"])
 app.include_router(visitas.router, prefix="/admin", tags=["visitas"])
 app.include_router(sensor.router, prefix="/exibicao", tags=["distance"])
+app.include_router(detectar_mao.router, prefix="/exibicao", tags=["detectar"])
 
 @app.get("/")
 async def read_root():
