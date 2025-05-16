@@ -8,7 +8,7 @@ const VisitaCounter = ({ obraId }) => {
     // Busca o contador atual
     const fetchInitialCount = async () => {
       try {
-        const response = await fetch(`http://192.168.1.25:8000/admin/visitas/${obraId}`);
+        const response = await fetch(`http://127.0.0.1:8000/admin/visitas/${obraId}`);
         const data = await response.json();
         setCount(data.numero_visitas || 0);
       } catch (error) {

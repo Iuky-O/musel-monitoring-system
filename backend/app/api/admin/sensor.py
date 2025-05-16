@@ -1,19 +1,43 @@
 from fastapi import APIRouter, HTTPException
 from app.data.database import database
+from app.data.database import get_visita_collection, get_obra_collection
 from app.models.Sensor import DistanceData
 from app.models.DistanceModel import DistanceDT
 from datetime import datetime, timedelta
 from typing import Optional
+import httpx
+from dotenv import load_dotenv
+import os
+from zoneinfo import ZoneInfo
+from datetime import timedelta, timezone
 
 router = APIRouter()
 
 ultima_distancia = {"distancia": None}
 tempo_inicial_visita = None
-tempo_necessario = timedelta(seconds=30)
+tempo_necessario = timedelta(seconds=10)
+status_pessoa_presente = False
+
+data_e_hora = datetime.now(ZoneInfo("America/Sao_Paulo")) - timedelta(hours=3)
+
 
 # ID da obra associada
-ID_OBRA = "67e0adad46e5b921c4a270d9"
-NOME_OBRA = "TESTE"
+ID_OBRA = os.getenv("ID_ATUAL")
+async def buscar_nome_obra_por_id(id_obra: str) -> str:
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.get(f"http://127.0.0.1:8000/admin/obras/{id_obra}")
+            if response.status_code == 200:
+                obra_data = response.json()
+                return obra_data.get("titulo", "Desconhecido")
+            else:
+                print(f"Erro ao buscar obra. Status: {response.status_code}")
+                return "Desconhecido"
+    except Exception as e:
+        print(f"Erro ao buscar nome da obra: {e}")
+        return "Desconhecido"
+
+leituras_collection = database["leituras"]
 
 @router.post("/distance")
 async def receive_distance(data: DistanceData):
@@ -32,7 +56,16 @@ async def receive_distance(data: DistanceData):
             tempo_passado = datetime.now() - tempo_inicial_visita
             if tempo_passado >= tempo_necessario:
                 print("Tempo alcançado! Registrando visita...") #Se completar 30 segundos: registra uma visita.
-                await registrar_visita(ID_OBRA, NOME_OBRA)
+                nome_obra = await buscar_nome_obra_por_id(ID_OBRA)
+                await registrar_visita(ID_OBRA, nome_obra)
+
+                await leituras_collection.insert_one({
+                    "id_obra": ID_OBRA,
+                    "distancia": data.distance,
+                    "timestamp": data_e_hora
+                })
+                print(data_e_hora)
+
                 tempo_inicial_visita = None  # Reseta para contar uma nova visita depois
     else:
         # Se sair da distância correta, resetar o tempo

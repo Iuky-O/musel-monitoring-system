@@ -10,7 +10,7 @@ import HandDetector from "../../components/HandDetector"
 const DISTANCIA_MIN = 20;
 const DISTANCIA_MAX = 30;
 const TEMPO_NECESSARIO_MS = 5000;
-const ID_OBRA = "67e0adad46e5b921c4a270d9";
+const ID_OBRA = "67e9aaaa9a27a5eb2b9b5714";
 
 function VisitanteObra() {
     const [distancia, setDistancia] = useState(null);
@@ -30,33 +30,6 @@ function VisitanteObra() {
             cancelarContagem();
         };
     }, []);
-
-    useEffect(() => {
-        const verificarMaoFechada = setInterval(async () => {
-            try {
-                const res = await fetch("http://127.0.0.1:8000/exibicao/status-mao");
-                const data = await res.json();
-
-                if (data.closed_hand && obra && obraExibida) {
-                    speakText(obra.descricao);
-                }
-            } catch (error) {
-                console.error("Erro ao verificar mão fechada:", error);
-            }
-        }, 2000); // Checa a cada 2 segundos
-
-        return () => clearInterval(verificarMaoFechada);
-    }, [obra, obraExibida]);
-
-    const handleFistDetected = async () => {
-        try {
-        await fetch("http://localhost:8000/exibicao/detectar-mao-fechada", {
-            method: "POST",
-        });
-        } catch (err) {
-        console.error("Erro ao enviar mão fechada:", err);
-        }
-    };
 
     const verificarDistancia = async () => {
         try {
@@ -192,7 +165,7 @@ function VisitanteObra() {
             ) : (
                 <p className="proximidade-msg">Aproxime-se da obra para iniciar a visita.</p>
             )}
-            {/* <HandDetector onFistDetected={handleFistDetected} /> */}
+
         </div>
                 
 

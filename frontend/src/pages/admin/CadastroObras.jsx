@@ -66,9 +66,9 @@ function CadastroObras() {
             <aside className="sidebar">
                 <h2>Admin</h2>
                 <nav>
+                    <a href="http://localhost:3000/#/user/obra">Dashboard</a>
                     <a href="http://localhost:3000/#/admin/cadastro">Cadastrar Obras</a>
                     <a href="http://localhost:3000/#/admin/lista">Listar Obras</a>
-                    <a href="http://localhost:3000/#/user/obra">Visitas</a>
                 </nav>
             </aside>
 
