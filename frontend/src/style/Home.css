@@ -1,0 +1,82 @@
+.home-container {
+    position: relative;
+    height: 100vh;
+    background-color: #0f1b2a; /* cor de fallback */
+    color: white;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+  
+  .home-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('../img/starry-night.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    z-index: 0;
+  }
+  
+  .home-header {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .home-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .home-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+  }
+  
+  .home-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .home-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-secondary,.btn-primary {
+    border: 2px solid white;
+    color: white;
+  }
+  
+  .btn-secondary:hover, .btn-primary:hover {
+    background-color: white;
+    color: #173753;
+  }
+  
+  .home-footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.8rem;
+    opacity: 0.6;
+  }
+  
