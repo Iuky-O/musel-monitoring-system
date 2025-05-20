@@ -33,6 +33,9 @@ async def shutdown_db_client():
 def get_obra_collection():
     return database['obras_de_arte']
 
+def get_admin_collection():
+    return database['admin']
+
 def get_visita_collection():
     return database.get_collection("visitacoes")
 

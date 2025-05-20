@@ -5,10 +5,10 @@ import {
   FilesetResolver
 } from '@mediapipe/tasks-vision';
 import HandDetector from "../../components/HandDetector"
-
+import { useObraContext } from '../../hook/ObraContext';
 
 const DISTANCIA_MIN = 20;
-const DISTANCIA_MAX = 30;
+const DISTANCIA_MAX = 50;
 const TEMPO_NECESSARIO_MS = 5000;
 const ID_OBRA = "67e9aaaa9a27a5eb2b9b5714";
 
@@ -19,6 +19,7 @@ function VisitanteObra() {
     const [tempoRestante, setTempoRestante] = useState(TEMPO_NECESSARIO_MS / 1000);
     const [obraExibida, setObraExibida] = useState(false);
     const [dentro, setDentro] = useState(false);
+    const { obraSelecionadaId } = useObraContext();
 
     const intervaloRef = useRef(null);
     const timeoutRef = useRef(null);
@@ -90,7 +91,7 @@ function VisitanteObra() {
         setTempoRestante(0);
 
         try {
-            const obraSelecionada = await buscarObraPorId(ID_OBRA);
+            const obraSelecionada = await buscarObraPorId(obraSelecionadaId);
             if (obraSelecionada) {
                 setObra(obraSelecionada);
                 setObraExibida(true);
@@ -163,7 +164,7 @@ function VisitanteObra() {
                     </div>
                 </div>
             ) : (
-                <p className="proximidade-msg">Aproxime-se da obra para iniciar a visita.</p>
+                <p className="proximidade-msg">Aproxime-se para iniciar a visita.</p>
             )}
 
         </div>

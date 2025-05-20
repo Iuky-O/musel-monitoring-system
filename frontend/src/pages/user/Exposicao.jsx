@@ -26,7 +26,7 @@ const Exposicao = () => {
       <div className="card-grid">
         {obras.map((obra) => (
           <Link
-            to={`/obra/${obra._id}`}
+            to={`/user/visualizar`}
             key={obra._id}
             className="art-card"
             onClick={() => setObraSelecionadaId(obra._id)}

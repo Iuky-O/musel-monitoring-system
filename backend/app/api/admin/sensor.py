@@ -47,7 +47,7 @@ async def receive_distance(data: DistanceData):
     ultima_distancia["distancia"] = data.distance
 
     # Verifica se esta entre (1 metro a 1,5 metro (100 a 150 cm))
-    if 20 <= data.distance <= 30:
+    if 20 <= data.distance <= 50:
         # Se ainda não começou a contar tempo
         if tempo_inicial_visita is None:
             tempo_inicial_visita = datetime.now()

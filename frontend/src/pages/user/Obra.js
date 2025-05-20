@@ -4,6 +4,7 @@ import ListaVisitas from '../../components/ListaVisitas';
 import EstatisticasVisitas from "../../components/EstatisticasVisitas";
 import ExportarDados from '../../components/ExportarDados';
 import GraficosEstatisticas from '../../components/GraficosEstatisticas';
+import Exemplo from '../../components/Exemplo';
 import { Link } from "react-router-dom";
 
 const Obra = () => {
@@ -35,6 +36,7 @@ const Obra = () => {
         <hr style={{ margin: "20px 0" }} />
         
         <GraficosEstatisticas />
+
       </main>
     </div>
   );

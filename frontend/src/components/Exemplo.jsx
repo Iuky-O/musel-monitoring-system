@@ -1,10 +1,9 @@
-
 import React, { useEffect, useState } from 'react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
 
-const GraficosEstatisticas = () => {
+const Exemplo = () => {
   const [horariosPico, setHorariosPico] = useState([]);
   const [visitasPorDia, setVisitasPorDia] = useState([]);
   const [obraMaisVisitada, setObraMaisVisitada] = useState([]);
@@ -87,8 +86,24 @@ const GraficosEstatisticas = () => {
           <Bar dataKey="visitas" fill="#8814a0" />
         </BarChart>
       </ResponsiveContainer>
+
+      <div>
+        <h5>Horários de Pico:</h5>
+        <ul>
+          {horariosPico.map((item, index) => (
+            <li key={index}>{item.hora} - {item.visitas} visitas</li>
+          ))}
+        </ul>
+
+        <h5>Visitas por Dia:</h5>
+        <ul>
+          {visitasPorDia.map((item, index) => (
+            <li key={index}>{item.data} - {item.visitas} visitas</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
 
-export default GraficosEstatisticas;
+export default Exemplo;

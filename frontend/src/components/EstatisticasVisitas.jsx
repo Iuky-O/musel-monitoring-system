@@ -62,11 +62,16 @@ const EstatisticasVisitas = () => {
       <p><strong>Mínima:</strong> {estatisticasDistancias.minima} cm</p>
       <p><strong>Máxima:</strong> {estatisticasDistancias.maxima} cm</p>
 
-      <h3>Últimas Leituras</h3>
+      <h3>Últimas 10 Leituras</h3>
       <ul>
-        {historicoPresenca.map((h, i) => (
-          <li key={i}>{new Date(h.timestamp).toLocaleString()} - {h.distancia} cm</li>
-        ))}
+        {historicoPresenca
+            .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+            .slice(0, 10)
+            .map((h, i) => (
+              <li key={i}>
+                {new Date(h.timestamp).toLocaleString()} - {h.distancia} cm
+              </li>
+          ))}
       </ul>
     </div>
   );

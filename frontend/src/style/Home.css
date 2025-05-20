@@ -53,6 +53,14 @@
     flex-wrap: wrap;
     justify-content: center;
   }
+
+  .home-buttons.btn-contet{
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
   
   .btn-primary,
   .btn-secondary {
@@ -80,3 +88,11 @@
     opacity: 0.6;
   }
   
+.text-input{
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-bottom: 10%;
+}
