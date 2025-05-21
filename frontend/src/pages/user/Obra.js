@@ -14,7 +14,7 @@ const Obra = () => {
   return (
     <div className="admin-container">
       <aside className="sidebar">
-          <h2>Administrado</h2>
+          <h2>Administrador</h2>
           <nav>
               <Link to="/user/obra">Dashboard</Link>
               <Link to="/admin/cadastro">Cadastrar Obra</Link>
