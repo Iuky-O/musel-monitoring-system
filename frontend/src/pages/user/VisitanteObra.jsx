@@ -20,6 +20,8 @@ function VisitanteObra() {
     const [obraExibida, setObraExibida] = useState(false);
     const [dentro, setDentro] = useState(false);
     const { obraSelecionadaId } = useObraContext();
+    const [lendoDescricao, setLendoDescricao] = useState(false);
+
 
     const intervaloRef = useRef(null);
     const timeoutRef = useRef(null);
@@ -123,10 +125,19 @@ function VisitanteObra() {
 
 
     const speakText = (text) => {
+        if (window.speechSynthesis.speaking) {
+            window.speechSynthesis.cancel();
+            setLendoDescricao(false);
+            return;
+        }
+    
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'pt-BR';
+        utterance.onend = () => setLendoDescricao(false);
+        setLendoDescricao(true);
         window.speechSynthesis.speak(utterance);
     };
+    
 
     return (
         <div className="visitante-container">
@@ -158,7 +169,7 @@ function VisitanteObra() {
                             <h3>Descrição</h3>
                             <p>{obra.descricao}</p>
                             <button className="botao-ouvir" onClick={() => speakText(obra.descricao)}>
-                                Ouvir Descrição
+                            {lendoDescricao ? "Pausar Áudio" : "Ouvir Descrição"}
                             </button>
                         </div>
                     </div>

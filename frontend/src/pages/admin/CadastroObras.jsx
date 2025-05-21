@@ -64,7 +64,7 @@ function CadastroObras() {
     return (
         <div className="admin-container">
             <aside className="sidebar">
-                <h2>Admin</h2>
+                <h2>Administrador</h2>
                 <nav>
                     <a href="http://localhost:3000/#/user/obra">Dashboard</a>
                     <a href="http://localhost:3000/#/admin/cadastro">Cadastrar Obras</a>
