@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 function ListaObras() {
     const [obras, setObras] = useState([]);
     const [erro, setErro] = useState(null);
+    const [lendoDescricao, setLendoDescricao] = useState(false);
 
     useEffect(() => {
         fetch("http://localhost:8000/admin/obras")
@@ -15,13 +16,19 @@ function ListaObras() {
                 setErro("Erro ao carregar obras.");
             });
     }, []);
-    
+
     const speakText = (text) => {
+        if (window.speechSynthesis.speaking) {
+            window.speechSynthesis.cancel();
+            setLendoDescricao(false);
+            return;
+        }
+
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'pt-BR';
+        utterance.onend = () => setLendoDescricao(false);
+        setLendoDescricao(true);
         window.speechSynthesis.speak(utterance);
-        const voices = window.speechSynthesis.getVoices();
-        console.log(voices);
     };
 
 
@@ -60,7 +67,7 @@ function ListaObras() {
 
                                 <div>
                                     <button className="botao-ouvir" onClick={() => speakText(obra.descricao)}>
-                                        Ouvir Descrição
+                                        {lendoDescricao ? "Pausar Áudio" : "Ouvir Descrição"}
                                     </button>
                                     {obra.video_url && (
                                         <video controls src={obra.video_url} className="obra-video" />

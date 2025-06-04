@@ -6,7 +6,7 @@ function Home() {
     <div className="home-container">
       <header className="home-header">
         <div className="home-content">
-          <h1>Seja Bem vindo ao Nosso Museul</h1>
+          <h1>Seja Bem vindo ao Nosso Museu</h1>
           <p>Aqui você pode mostrar as suas melhores obras e ainda conferir estatisticas sobre elas!</p>
           <div className="home-buttons">
             <a href="#/autenticar" className="btn-primary">Área do Administrador</a>

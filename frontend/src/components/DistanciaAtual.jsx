@@ -5,7 +5,7 @@ const DistanciaAtual = () => {
 
   const fetchDistancia = async () => {
     try {
-      const res = await fetch("http://192.168.1.44:8000/exibicao/distance");
+      const res = await fetch("http://192.168.222.221:8000/exibicao/distance");
       const data = await res.json();
       setDistancia(data.distancia);
     } catch (error) {
